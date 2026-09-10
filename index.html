@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kaky Jean Philippe Lachapelle — Nest.js · Next.js · Symfony</title>
+  <meta name="description" content="Lead full-stack — Nest.js, Next.js, Symfony, TypeScript, TypeORM, GitLab, Docker. Remote & freelance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --surface: #121821;
+      --border: #1e2936;
+      --text: #e8eef5;
+      --muted: #8b9bb0;
+      --accent: #5eead4;
+      --accent-dim: #2dd4bf33;
+      --max: 720px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% -10%, #134e4a55, transparent),
+        radial-gradient(ellipse 60% 40% at 90% 10%, #1e3a5f44, transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 3rem 1.25rem 4rem;
+    }
+    .lang-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.25rem;
+      gap: 0.35rem;
+    }
+    .lang-bar button {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .lang-bar button.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+    header { margin-bottom: 2.5rem; }
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: clamp(1.75rem, 5vw, 2.35rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    .specialty {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.88rem;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+      line-height: 1.5;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 40rem;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .links a:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .links a.primary {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    section { margin-top: 2.75rem; }
+    h2 {
+      font-size: 0.8rem;
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .chip {
+      font-size: 0.82rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 0.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .chip.core {
+      border-color: #2a6b62;
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .job, .project {
+      padding: 1.05rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .job:last-child, .project:last-child { border-bottom: none; }
+    .job h3, .project h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .meta {
+      font-size: 0.8rem;
+      font-family: "JetBrains Mono", monospace;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .job ul {
+      padding-left: 1.1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .job li { margin: 0.28rem 0; }
+    .project p, .prose {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .prose { margin-bottom: 0.85rem; max-width: 40rem; }
+    .edu p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.55rem;
+    }
+    .edu strong { color: var(--text); font-weight: 600; }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); }
+    [data-lang="fr"], [data-lang="en"] { display: none !important; }
+    html[lang="fr"] [data-lang="fr"],
+    html[lang="en"] [data-lang="en"] { display: revert !important; }
+    html[lang="fr"] li[data-lang="fr"],
+    html[lang="en"] li[data-lang="en"] { display: list-item !important; }
+    html[lang="fr"] a[data-lang="fr"],
+    html[lang="en"] a[data-lang="en"] { display: inline-flex !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="lang-bar" role="group" aria-label="Language">
+      <button type="button" id="btn-fr" class="active" data-set-lang="fr">FR</button>
+      <button type="button" id="btn-en" data-set-lang="en">EN</button>
+    </div>
+
+    <header>
+      <p class="eyebrow" data-lang="fr">Antananarivo · Madagascar · Remote &amp; freelance</p>
+      <p class="eyebrow" data-lang="en">Antananarivo · Madagascar · Remote &amp; freelance</p>
+      <h1>Kaky Jean Philippe Lachapelle</h1>
+      <p class="specialty">Nest.js · Next.js · Symfony · TypeScript · TypeORM · GitLab · Docker</p>
+      <p class="lead" data-lang="fr">
+        Lead full-stack. Je conçois et livre des applications web et des APIs —
+        de l’architecture à la production — avec une spécialisation sur Nest.js, Next.js
+        et Symfony, et une maîtrise opérationnelle de TypeORM, GitLab CI/CD et Docker.
+      </p>
+      <p class="lead" data-lang="en">
+        Full-stack lead. I design and ship demanding web apps and APIs — from architecture
+        to production — with a clear focus on Nest.js, Next.js and Symfony, backed by TypeORM,
+        GitLab CI/CD and Docker.
+      </p>
+      <div class="links">
+        <a class="primary" href="mailto:lachapelle.kaky@gmail.com" data-lang="fr">Me contacter</a>
+        <a class="primary" href="mailto:lachapelle.kaky@gmail.com" data-lang="en">Contact me</a>
+        <a href="https://wa.me/261330730420" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://github.com/kajeli7" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </header>
+
+    <section>
+      <h2 data-lang="fr">Approche</h2>
+      <h2 data-lang="en">Approach</h2>
+      <p class="prose" data-lang="fr">
+        Les clients et les équipes remote recherchent souvent un profil net sur un socle technique.
+        C’est pourquoi je me positionne d’abord sur Nest / Next / Symfony / TypeScript.
+        Autour de ce cœur, j’apporte une polyvalence utile (Vue, React, PHP, data) sans diluer
+        la promesse : un interlocuteur fiable pour concevoir, développer et déployer.
+      </p>
+      <p class="prose" data-lang="en">
+        Clients and remote teams usually look for a clear technical core.
+        That is why I lead with Nest / Next / Symfony / TypeScript.
+        Around that core I bring useful range (Vue, React, PHP, data) without diluting
+        the promise: a reliable counterpart to design, build and ship.
+      </p>
+    </section>
+
+    <section>
+      <h2>Stack</h2>
+      <div class="chips">
+        <span class="chip core">Nest.js</span>
+        <span class="chip core">Next.js</span>
+        <span class="chip core">Symfony</span>
+        <span class="chip core">TypeScript</span>
+        <span class="chip core">TypeORM</span>
+        <span class="chip core">GitLab CI/CD</span>
+        <span class="chip core">Docker</span>
+        <span class="chip">Vue.js 3</span>
+        <span class="chip">React</span>
+        <span class="chip">PostgreSQL / MariaDB</span>
+        <span class="chip">PHP 8</span>
+        <span class="chip">API Platform</span>
+        <span class="chip">PHPUnit / PHPStan</span>
+        <span class="chip">Cursor</span>
+        <span class="chip">Claude Code</span>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-lang="fr">Parcours</h2>
+      <h2 data-lang="en">Experience</h2>
+
+      <article class="job">
+        <h3 data-lang="fr">Lead technique &amp; full-stack — freelance</h3>
+        <h3 data-lang="en">Technical lead &amp; full-stack — freelance</h3>
+        <p class="meta">Nest.js · Next.js · TypeScript · TypeORM · Docker · GitLab CI/CD</p>
+        <ul>
+          <li data-lang="fr">Mise en production et environnements de développement (Nest, Next, Docker, GitLab) · APIs conçues et livrées dans le respect des délais</li>
+          <li data-lang="en">Production releases and development environments (Nest, Next, Docker, GitLab) · APIs designed and delivered on schedule</li>
+          <li data-lang="fr">Conseil technique et revue de code (Next.js + Nest.js) : déblocage des équipes sur une plateforme de candidatures locatives</li>
+          <li data-lang="en">Technical advisory and code review (Next.js + Nest.js): unblocking teams on a rental-application platform</li>
+          <li data-lang="fr">Application d’approvisionnement pour la restauration conçue et livrée dès l’origine</li>
+          <li data-lang="en">Restaurant supply / procurement application designed and delivered from the outset</li>
+          <li data-lang="fr">Plateforme santé : contribution à l’homologation et travaux sur le DMP (Dossier Médical Partagé)</li>
+          <li data-lang="en">Healthcare platform: contribution to homologation and work on the DMP (French shared medical record)</li>
+          <li data-lang="fr">Académie e-learning HSE / SSE : revue de code, développements spécifiques et correction de bugs sur un thème WordPress custom et ses plugins</li>
+          <li data-lang="en">HSE / SSE e-learning academy: code review, targeted feature development and bug fixes on a custom WordPress theme and its plugins</li>
+        </ul>
+      </article>
+
+      <article class="job">
+        <h3 data-lang="fr">Lead développeur — Sahaza Group</h3>
+        <h3 data-lang="en">Lead developer — Sahaza Group</h3>
+        <p class="meta">Symfony 6.4 · Vue.js 3 · API Platform · Docker · PHPUnit · GitLab</p>
+        <ul>
+          <li data-lang="fr">Lead de deux développeurs : répartition du travail, revue de code, déblocage</li>
+          <li data-lang="en">Led two developers: workload split, code review, unblocking</li>
+          <li data-lang="fr">Livraison de fonctionnalités sur une plateforme e-learning à grande échelle : performance, montées de version, tests</li>
+          <li data-lang="en">Feature delivery on a large-scale e-learning platform: performance, framework upgrades, tests</li>
+        </ul>
+      </article>
+
+      <article class="job">
+        <h3 data-lang="fr">Autres missions</h3>
+        <h3 data-lang="en">Other engagements</h3>
+        <p class="meta">Spring Boot · Angular · React · Symfony · Machine learning · SQL</p>
+        <ul>
+          <li data-lang="fr">Applications de comptabilité, de stock et de prise de commande pour la restauration</li>
+          <li data-lang="en">Accounting, inventory and restaurant ordering applications</li>
+          <li data-lang="fr">Système de scoring crédit par apprentissage automatique et interface métier (SMMEC)</li>
+          <li data-lang="en">Machine-learning credit scoring system with a business-facing UI (SMMEC)</li>
+          <li data-lang="fr">Refonte d’application institutionnelle, prédiction d’effectifs et plateforme d’emploi (SOA)</li>
+          <li data-lang="en">Institutional app rewrite, enrollment forecasting and a job platform (SOA)</li>
+          <li data-lang="fr">Reporting de caisses : millions de lignes, information disponible en quelques secondes plutôt qu’en plusieurs jours (SMMEC)</li>
+          <li data-lang="en">Cash-desk reporting over millions of rows: insight in seconds instead of days (SMMEC)</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="edu">
+      <h2 data-lang="fr">Formation</h2>
+      <h2 data-lang="en">Education</h2>
+      <p data-lang="fr"><strong>Master 2 BIHAR</strong> — ESTIA (France) · ingénierie des données et intelligence artificielle</p>
+      <p data-lang="en"><strong>Master’s (BIHAR)</strong> — ESTIA (France) · data engineering &amp; artificial intelligence</p>
+      <p data-lang="fr"><strong>Licence Informatique</strong> — IT-University Antananarivo · développement full-stack</p>
+      <p data-lang="en"><strong>BSc Computer Science</strong> — IT-University Antananarivo · full-stack development</p>
+    </section>
+
+    <section>
+      <h2 data-lang="fr">Échanger</h2>
+      <h2 data-lang="en">Get in touch</h2>
+      <p class="prose" data-lang="fr">
+        Si vous cherchez un lead full-stack sur Nest.js, Next.js ou Symfony —
+        pour une mission remote ou un besoin freelance — je serai ravi d’en discuter
+        et de vous proposer un plan de travail adapté.
+      </p>
+      <p class="prose" data-lang="en">
+        If you need a full-stack lead on Nest.js, Next.js or Symfony —
+        for a remote engagement or a freelance brief — I would be glad to discuss it
+        and propose a clear delivery plan.
+      </p>
+      <div class="links" style="margin-top:0.75rem">
+        <a class="primary" href="mailto:lachapelle.kaky@gmail.com">lachapelle.kaky@gmail.com</a>
+        <a href="https://wa.me/261330730420" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-lang="fr">Projets personnels</h2>
+      <h2 data-lang="en">Personal projects</h2>
+
+      <article class="project">
+        <h3>Rova</h3>
+        <p class="meta">C++20 · OpenGL 4.5 · CMake</p>
+        <p data-lang="fr">Moteur 3D isométrique conçu dès l’origine : rendu, scènes, assets et outils d’édition pour prototyper des expériences de jeu exigeantes.</p>
+        <p data-lang="en">Custom isometric 3D engine built from the outset: rendering, scenes, assets and editing tools for demanding game prototypes.</p>
+      </article>
+
+      <article class="project">
+        <h3>ts-structure-radar</h3>
+        <p class="meta">TypeScript · Tree-sitter · NestJS</p>
+        <p data-lang="fr">Analyse d’architecture TypeScript / NestJS : extraction de modules et dépendances, visualisation offline et exports Mermaid pour comprendre un codebase rapidement.</p>
+        <p data-lang="en">TypeScript / NestJS architecture analysis: module and dependency extraction, offline visualisation and Mermaid exports to read a codebase quickly.</p>
+      </article>
+
+      <article class="project">
+        <h3>MalagasyWire</h3>
+        <p class="meta">.NET · WFP · Tauri · React</p>
+        <p data-lang="fr">Visibilité réseau et firewall applicatif sous Windows : capture, règles et détection d’anomalies pour garder le contrôle du trafic machine.</p>
+        <p data-lang="en">Windows network visibility and application firewall: capture, rules and anomaly detection to keep host traffic under control.</p>
+      </article>
+
+      <article class="project">
+        <h3>Aikam</h3>
+        <p class="meta">Next.js · Nest.js · Python · LangGraph</p>
+        <p data-lang="fr">Opérateur autonome de commerce social : workflows boutique, politiques d’approbation et interface d’opération, avec des garde-fous métier.</p>
+        <p data-lang="en">Autonomous social-commerce operator: store workflows, approval policies and an ops UI, with business guardrails.</p>
+      </article>
+
+      <article class="project">
+        <h3>Pomodoro</h3>
+        <p class="meta">C# · .NET · Windows tray</p>
+        <p data-lang="fr">Minuteur Pomodoro pour Windows dans la barre système : cycles focus / pause configurables, notifications, overlay de pause optionnel, exécutable autonome (pas d'installateur). Les réglages restent locaux.</p>
+        <p data-lang="en">Windows system-tray Pomodoro timer: configurable focus/break cycles, notifications, optional break overlay, self-contained executable (no installer). Settings stay local.</p>
+      </article>
+    </section>
+
+    <footer>
+      <p data-lang="fr">Français · Anglais · Malagasy · <a href="https://github.com/kajeli7">GitHub</a></p>
+      <p data-lang="en">French · English · Malagasy · <a href="https://github.com/kajeli7">GitHub</a></p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var KEY = "portfolio-lang";
+      var html = document.documentElement;
+      function apply(lang) {
+        lang = lang === "en" ? "en" : "fr";
+        html.lang = lang;
+        document.getElementById("btn-fr").classList.toggle("active", lang === "fr");
+        document.getElementById("btn-en").classList.toggle("active", lang === "en");
+        try { localStorage.setItem(KEY, lang); } catch (e) {}
+      }
+      var saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+      apply(saved === "en" ? "en" : "fr");
+      document.getElementById("btn-fr").addEventListener("click", function () { apply("fr"); });
+      document.getElementById("btn-en").addEventListener("click", function () { apply("en"); });
+    })();
+  </script>
+</body>
+</html>
