@@ -17,7 +17,7 @@
       --muted: #8b9bb0;
       --accent: #5eead4;
       --accent-dim: #2dd4bf33;
-      --max: 720px;
+      --max: 900px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -183,14 +183,77 @@
       margin-bottom: 0.55rem;
     }
     .edu strong { color: var(--text); font-weight: 600; }
-    footer {
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-top: 0.85rem;
+    }
+    @media (max-width: 640px) {
+      .gallery { grid-template-columns: 1fr; }
+    }
+    .gallery img, .gallery video {
+      width: 100%;
+      height: auto;
+      border-radius: 0.55rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: block;
+    }
+    .gallery img {
+      cursor: zoom-in;
+      object-fit: cover;
+      aspect-ratio: 16 / 10;
+    }
+    .gallery.gallery-portrait img { aspect-ratio: auto; object-fit: contain; background: #0a0e13; }
+    .gallery video { aspect-ratio: 16 / 10; object-fit: contain; background: #000; }
+    .gallery-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.85rem;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .cta {
       margin-top: 3rem;
+      padding: 1.5rem 1.25rem;
+      border-radius: 0.85rem;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #121821 0%, #0e141c 100%);
+    }
+    .cta h2 {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0.75rem;
+    }
+    footer {
+      margin-top: 2rem;
       padding-top: 1.25rem;
       border-top: 1px solid var(--border);
       font-size: 0.85rem;
       color: var(--muted);
     }
     footer a { color: var(--accent); }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: #000000cc;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: min(1100px, 100%);
+      max-height: 90vh;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+    }
     [data-lang="fr"], [data-lang="en"] { display: none !important; }
     html[lang="fr"] [data-lang="fr"],
     html[lang="en"] [data-lang="en"] { display: revert !important; }
@@ -329,6 +392,85 @@
     </section>
 
     <section>
+      <h2 data-lang="fr">Projets personnels</h2>
+      <h2 data-lang="en">Personal projects</h2>
+
+      <article class="project">
+        <h3>Rova</h3>
+        <p class="meta">C++20 · OpenGL 4.5 · CMake</p>
+        <p data-lang="fr">Moteur 3D isométrique conçu dès l’origine : rendu, scènes, assets et outils d’édition pour prototyper des expériences de jeu exigeantes.</p>
+        <p data-lang="en">Custom isometric 3D engine built from the outset: rendering, scenes, assets and editing tools for demanding game prototypes.</p>
+        <p class="gallery-label" data-lang="fr">Captures</p>
+        <p class="gallery-label" data-lang="en">Screenshots</p>
+        <div class="gallery">
+          <img src="assets/projects/rova/photos/01.png" alt="Rova — capture 1" loading="lazy" />
+          <img src="assets/projects/rova/photos/02.png" alt="Rova — capture 2" loading="lazy" />
+          <img src="assets/projects/rova/photos/03.png" alt="Rova — capture 3" loading="lazy" />
+          <img src="assets/projects/rova/photos/04.png" alt="Rova — capture 4" loading="lazy" />
+        </div>
+        <p class="gallery-label" data-lang="fr">Démos vidéo</p>
+        <p class="gallery-label" data-lang="en">Video demos</p>
+        <div class="gallery">
+          <video controls preload="metadata" playsinline poster="assets/projects/rova/photos/02.png">
+            <source src="assets/projects/rova/videos/01.mp4" type="video/mp4" />
+          </video>
+          <video controls preload="metadata" playsinline poster="assets/projects/rova/photos/03.png">
+            <source src="assets/projects/rova/videos/02.mp4" type="video/mp4" />
+          </video>
+          <video controls preload="metadata" playsinline poster="assets/projects/rova/photos/01.png">
+            <source src="assets/projects/rova/videos/03.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </article>
+
+      <article class="project">
+        <h3>Aikam</h3>
+        <p class="meta">Next.js · Nest.js · Python · LangGraph</p>
+        <p data-lang="fr">Opérateur autonome de commerce social : workflows boutique, politiques d’approbation et interface d’opération, avec des garde-fous métier.</p>
+        <p data-lang="en">Autonomous social-commerce operator: store workflows, approval policies and an ops UI, with business guardrails.</p>
+        <p class="gallery-label" data-lang="fr">Captures</p>
+        <p class="gallery-label" data-lang="en">Screenshots</p>
+        <div class="gallery">
+          <img src="assets/projects/aikam/01.png" alt="Aikam — catalog admin" loading="lazy" />
+          <img src="assets/projects/aikam/02.png" alt="Aikam — approvals" loading="lazy" />
+          <img src="assets/projects/aikam/03.png" alt="Aikam — capture 3" loading="lazy" />
+          <img src="assets/projects/aikam/04.png" alt="Aikam — capture 4" loading="lazy" />
+          <img src="assets/projects/aikam/05.png" alt="Aikam — capture 5" loading="lazy" />
+          <img src="assets/projects/aikam/06.png" alt="Aikam — capture 6" loading="lazy" />
+        </div>
+      </article>
+
+      <article class="project">
+        <h3>Pomodoro</h3>
+        <p class="meta">C# · .NET · Windows tray</p>
+        <p data-lang="fr">Minuteur Pomodoro pour Windows dans la barre système : cycles focus / pause configurables, notifications, overlay de pause optionnel, exécutable autonome (pas d'installateur). Les réglages restent locaux.</p>
+        <p data-lang="en">Windows system-tray Pomodoro timer: configurable focus/break cycles, notifications, optional break overlay, self-contained executable (no installer). Settings stay local.</p>
+        <p class="gallery-label" data-lang="fr">Captures</p>
+        <p class="gallery-label" data-lang="en">Screenshots</p>
+        <div class="gallery gallery-portrait">
+          <img src="assets/projects/pomodoro/01-focus.png" alt="Pomodoro — focus" loading="lazy" />
+          <img src="assets/projects/pomodoro/02-tray-states.png" alt="Pomodoro — tray states" loading="lazy" />
+          <img src="assets/projects/pomodoro/03-settings.png" alt="Pomodoro — settings" loading="lazy" />
+          <img src="assets/projects/pomodoro/04-break-overlay.png" alt="Pomodoro — break overlay" loading="lazy" />
+        </div>
+      </article>
+
+      <article class="project">
+        <h3>ts-structure-radar</h3>
+        <p class="meta">TypeScript · Tree-sitter · NestJS</p>
+        <p data-lang="fr">Analyse d’architecture TypeScript / NestJS : extraction de modules et dépendances, visualisation offline et exports Mermaid pour comprendre un codebase rapidement.</p>
+        <p data-lang="en">TypeScript / NestJS architecture analysis: module and dependency extraction, offline visualisation and Mermaid exports to read a codebase quickly.</p>
+      </article>
+
+      <article class="project">
+        <h3>MalagasyWire</h3>
+        <p class="meta">.NET · WFP · Tauri · React</p>
+        <p data-lang="fr">Visibilité réseau et firewall applicatif sous Windows : capture, règles et détection d’anomalies pour garder le contrôle du trafic machine.</p>
+        <p data-lang="en">Windows network visibility and application firewall: capture, rules and anomaly detection to keep host traffic under control.</p>
+      </article>
+    </section>
+
+    <section class="cta" id="echanger">
       <h2 data-lang="fr">Échanger</h2>
       <h2 data-lang="en">Get in touch</h2>
       <p class="prose" data-lang="fr">
@@ -347,50 +489,14 @@
       </div>
     </section>
 
-    <section>
-      <h2 data-lang="fr">Projets personnels</h2>
-      <h2 data-lang="en">Personal projects</h2>
-
-      <article class="project">
-        <h3>Rova</h3>
-        <p class="meta">C++20 · OpenGL 4.5 · CMake</p>
-        <p data-lang="fr">Moteur 3D isométrique conçu dès l’origine : rendu, scènes, assets et outils d’édition pour prototyper des expériences de jeu exigeantes.</p>
-        <p data-lang="en">Custom isometric 3D engine built from the outset: rendering, scenes, assets and editing tools for demanding game prototypes.</p>
-      </article>
-
-      <article class="project">
-        <h3>ts-structure-radar</h3>
-        <p class="meta">TypeScript · Tree-sitter · NestJS</p>
-        <p data-lang="fr">Analyse d’architecture TypeScript / NestJS : extraction de modules et dépendances, visualisation offline et exports Mermaid pour comprendre un codebase rapidement.</p>
-        <p data-lang="en">TypeScript / NestJS architecture analysis: module and dependency extraction, offline visualisation and Mermaid exports to read a codebase quickly.</p>
-      </article>
-
-      <article class="project">
-        <h3>MalagasyWire</h3>
-        <p class="meta">.NET · WFP · Tauri · React</p>
-        <p data-lang="fr">Visibilité réseau et firewall applicatif sous Windows : capture, règles et détection d’anomalies pour garder le contrôle du trafic machine.</p>
-        <p data-lang="en">Windows network visibility and application firewall: capture, rules and anomaly detection to keep host traffic under control.</p>
-      </article>
-
-      <article class="project">
-        <h3>Aikam</h3>
-        <p class="meta">Next.js · Nest.js · Python · LangGraph</p>
-        <p data-lang="fr">Opérateur autonome de commerce social : workflows boutique, politiques d’approbation et interface d’opération, avec des garde-fous métier.</p>
-        <p data-lang="en">Autonomous social-commerce operator: store workflows, approval policies and an ops UI, with business guardrails.</p>
-      </article>
-
-      <article class="project">
-        <h3>Pomodoro</h3>
-        <p class="meta">C# · .NET · Windows tray</p>
-        <p data-lang="fr">Minuteur Pomodoro pour Windows dans la barre système : cycles focus / pause configurables, notifications, overlay de pause optionnel, exécutable autonome (pas d'installateur). Les réglages restent locaux.</p>
-        <p data-lang="en">Windows system-tray Pomodoro timer: configurable focus/break cycles, notifications, optional break overlay, self-contained executable (no installer). Settings stay local.</p>
-      </article>
-    </section>
-
     <footer>
       <p data-lang="fr">Français · Anglais · Malagasy · <a href="https://github.com/kajeli7">GitHub</a></p>
       <p data-lang="en">French · English · Malagasy · <a href="https://github.com/kajeli7">GitHub</a></p>
     </footer>
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" hidden>
+    <img src="" alt="" />
   </div>
 
   <script>
@@ -409,6 +515,26 @@
       apply(saved === "en" ? "en" : "fr");
       document.getElementById("btn-fr").addEventListener("click", function () { apply("fr"); });
       document.getElementById("btn-en").addEventListener("click", function () { apply("en"); });
+
+      var lb = document.getElementById("lightbox");
+      var lbImg = lb.querySelector("img");
+      document.querySelectorAll(".gallery img").forEach(function (img) {
+        img.addEventListener("click", function () {
+          lbImg.src = img.src;
+          lbImg.alt = img.alt || "";
+          lb.hidden = false;
+          lb.classList.add("open");
+        });
+      });
+      function closeLb() {
+        lb.classList.remove("open");
+        lb.hidden = true;
+        lbImg.src = "";
+      }
+      lb.addEventListener("click", closeLb);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeLb();
+      });
     })();
   </script>
 </body>
