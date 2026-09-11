@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kaky Lachapelle - Lead technique &amp; développeur full-stack</title>
+  <meta name="description" content="Développement d'applications métier, reprise de plateformes et accompagnement technique. NestJS, Next.js, Symfony. Missions freelance à distance depuis Madagascar." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #081426;
+      --surface: #10243a;
+      --border: #26435e;
+      --text: #eaf4ff;
+      --muted: #a3b8ce;
+      --accent: #38bdf8;
+      --accent-dim: #38bdf826;
+      --max: 900px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% -10%, #07598555, transparent),
+        radial-gradient(ellipse 60% 40% at 90% 10%, #1e40af22, transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 3rem 1.25rem 4rem;
+    }
+    .lang-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.25rem;
+      gap: 0.35rem;
+    }
+    .lang-bar button {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .lang-bar button.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+    header { margin-bottom: 2.5rem; }
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: clamp(1.75rem, 5vw, 2.35rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    .specialty {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.88rem;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+      line-height: 1.5;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 40rem;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .links a:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .links a.primary {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    section { margin-top: 2.75rem; }
+    h2 {
+      font-size: 0.8rem;
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .chip {
+      font-size: 0.82rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 0.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .chip.core {
+      border-color: #287eaa;
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .job, .project {
+      padding: 1.05rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .job:last-child, .project:last-child { border-bottom: none; }
+    .job h3, .project h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .meta {
+      font-size: 0.8rem;
+      font-family: "JetBrains Mono", monospace;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .job ul {
+      padding-left: 1.1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .job li { margin: 0.28rem 0; }
+    .project p, .prose {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .prose { margin-bottom: 0.85rem; max-width: 40rem; }
+    .edu p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.55rem;
+    }
+    .edu strong { color: var(--text); font-weight: 600; }
+    .gallery {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0.75rem;
+      margin-top: 0.85rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 0.55rem;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+    }
+    .gallery::-webkit-scrollbar { height: 6px; }
+    .gallery::-webkit-scrollbar-thumb {
+      background: #365875;
+      border-radius: 999px;
+    }
+    .gallery img, .gallery video {
+      flex: 0 0 auto;
+      width: min(320px, 78vw);
+      height: auto;
+      border-radius: 0.55rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: block;
+      scroll-snap-align: start;
+    }
+    .gallery img {
+      cursor: zoom-in;
+      object-fit: cover;
+      aspect-ratio: 16 / 10;
+    }
+    .gallery.gallery-portrait img {
+      width: min(220px, 70vw);
+      aspect-ratio: auto;
+      object-fit: contain;
+      background: #091a2c;
+    }
+    .gallery video {
+      width: min(420px, 85vw);
+      aspect-ratio: 16 / 10;
+      object-fit: contain;
+      background: #000;
+    }
+    .gallery-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.85rem;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .cta {
+      margin-top: 3rem;
+      padding: 1.5rem 1.25rem;
+      border-radius: 0.85rem;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #10243a 0%, #0b1b30 100%);
+    }
+    .cta h2 {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0.75rem;
+    }
+    footer {
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: #040c18e6;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: min(1100px, 100%);
+      max-height: 90vh;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+    }
+    [data-lang="fr"], [data-lang="en"] { display: none !important; }
+    html[lang="fr"] [data-lang="fr"],
+    html[lang="en"] [data-lang="en"] { display: revert !important; }
+    html[lang="fr"] li[data-lang="fr"],
+    html[lang="en"] li[data-lang="en"] { display: list-item !important; }
+    html[lang="fr"] a[data-lang="fr"],
+    html[lang="en"] a[data-lang="en"] { display: inline-flex !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="lang-bar" role="group" aria-label="Language">
+      <button type="button" id="btn-fr" class="active" data-set-lang="fr">FR</button>
+      <button type="button" id="btn-en" data-set-lang="en">EN</button>
+    </div>
+
+    <header>
+      <p class="eyebrow" data-lang="fr">
+        Antananarivo · Madagascar · Missions freelance à distance
+      </p>
+      <p class="eyebrow" data-lang="en">
+        Antananarivo · Madagascar · Remote freelance work
+      </p>
+      <h1>Kaky Jean Philippe Lachapelle</h1>
+      <p class="specialty">NestJS · Next.js · Symfony · TypeScript</p>
+      <p class="lead" data-lang="fr">
+        Lead technique et développeur full-stack, je transforme les besoins métier en applications et APIs prêtes pour la production. Je prends en charge le développement, les choix d'architecture et la mise en place des déploiements, tout en accompagnant les équipes dans la livraison.
+      </p>
+      <p class="lead" data-lang="en">
+        As a technical lead and full-stack developer, I turn business requirements into applications and APIs ready for production. I combine hands-on development, architecture decisions and deployment setup with day-to-day support for the development team.
+      </p>
+      <div class="links">
+        <a class="primary" href="mailto:lachapelle.kaky@gmail.com" data-lang="fr">Me contacter</a>
+        <a class="primary" href="mailto:lachapelle.kaky@gmail.com" data-lang="en">Contact me</a>
+        <a href="https://wa.me/261330730420" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://github.com/kaky-lachapelle" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </header>
+
+    <section>
+      <h2 data-lang="fr">Ma façon de travailler</h2>
+      <h2 data-lang="en">How I work</h2>
+      <p class="prose" data-lang="fr">
+        Je commence par clarifier les besoins, les contraintes et les priorités. Sur une application existante, j'examine le code et les intégrations avant de proposer les changements. Pendant le développement, je contribue au code, accompagne les développeurs et prépare la mise en production. Mon objectif : livrer les fonctionnalités attendues dans le respect des délais et laisser une base que l'équipe peut faire évoluer.
+      </p>
+      <p class="prose" data-lang="en">
+        I start by clarifying requirements, constraints and priorities. For an existing application, I review the code and integrations before proposing changes. During development, I write code, support developers and prepare the release. The goal is to deliver the agreed features on schedule and leave the team with a codebase they can maintain and extend.
+      </p>
+    </section>
+
+    <section>
+      <h2>Stack</h2>
+      <div class="chips">
+        <span class="chip core">NestJS</span>
+        <span class="chip core">Next.js</span>
+        <span class="chip core">Symfony</span>
+        <span class="chip core">TypeScript</span>
+        <span class="chip core">TypeORM</span>
+        <span class="chip core">GitLab CI/CD</span>
+        <span class="chip core">Docker</span>
+        <span class="chip">Vue.js 3</span>
+        <span class="chip">React</span>
+        <span class="chip">PostgreSQL / MariaDB</span>
+        <span class="chip">PHP 8</span>
+        <span class="chip">API Platform</span>
+        <span class="chip">PHPUnit / PHPStan</span>
+        <span class="chip">Cursor</span>
+        <span class="chip">Claude Code</span>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-lang="fr">Expérience et réalisations</h2>
+      <h2 data-lang="en">Experience and selected work</h2>
+
+      <article class="job">
+        <h3 data-lang="fr">Lead technique &amp; développeur full-stack</h3>
+        <h3 data-lang="en">Technical Lead &amp; Full-Stack Developer</h3>
+                <p class="meta">NestJS · Next.js · TypeScript · TypeORM · Docker · GitLab CI/CD · Stripe Connect</p>
+        <ul>
+          <li data-lang="fr">Développement d'applications web et d'APIs : conception de l'architecture, implémentation des fonctionnalités métier et mise en production avec Next.js, NestJS, Docker et GitLab CI/CD.</li>
+          <li data-lang="en">Built web applications and APIs with Next.js, NestJS, Docker and GitLab CI/CD, covering architecture, business features and production deployment.</li>
+          <li data-lang="fr">Conception et développement du socle d'une plateforme multi-tenant, puis de ses fonctionnalités clés : authentification, catalogue, mise en relation, commandes, paiements Stripe Connect et intégration logistique.</li>
+          <li data-lang="en">Designed and built a multi-tenant platform's foundation and core features: authentication, catalog, business matching, orders, Stripe Connect payments and logistics integration.</li>
+          <li data-lang="fr">Reprise d'une plateforme santé : audit du code et des services connectés, correctifs critiques et migration de l'hébergement. Accompagnement technique du dossier d'agrément pour les échanges avec le Dossier médical partagé (DMP).</li>
+          <li data-lang="en">Took over a healthcare platform: reviewed the code and connected services, addressed critical issues and migrated the hosting infrastructure. Supported the approval process for integrations with France's shared medical record system (DMP).</li>
+          <li data-lang="fr">Mise en place d'une chaîne de livraison : migration GitLab, pipelines CI/CD, environnements de recette et de production avec Docker Swarm et Kubernetes, et revue de code avant intégration.</li>
+          <li data-lang="en">Set up the delivery workflow: GitLab migration, CI/CD pipelines, staging and production environments using Docker Swarm and Kubernetes, and code review before merging.</li>
+          <li data-lang="fr">Accompagnement technique de plusieurs équipes : arbitrages d'architecture, audits de reprise, revue de code et intégration des nouveaux développeurs.</li>
+          <li data-lang="en">Provided technical guidance across several teams through architecture decisions, codebase assessments, code reviews and developer onboarding.</li>
+        </ul>
+      </article>
+
+      <article class="job">
+        <h3 data-lang="fr">Lead développeur — Sahaza Group</h3>
+        <h3 data-lang="en">Lead developer — Sahaza Group</h3>
+        <p class="meta">Symfony · Vue.js · React · NestJS · API Platform · Docker · PHPUnit</p>
+        <ul>
+          <li data-lang="fr">Encadrement de deux développeurs : répartition du travail, revue de code et accompagnement sur les difficultés d'implémentation.</li>
+          <li data-lang="en">Led two developers, coordinating tasks, reviewing code and helping resolve implementation challenges.</li>
+          <li data-lang="fr">Développement et évolution d'une plateforme e-learning : nouvelles fonctionnalités, refactorisation, optimisation des performances, mises à niveau et tests.</li>
+          <li data-lang="en">Developed and maintained an e-learning platform, delivering features, refactoring code, improving performance, upgrading frameworks and adding tests.</li>
+        </ul>
+      </article>
+
+      <article class="job">
+        <h3 data-lang="fr">Autres missions</h3>
+        <h3 data-lang="en">Other engagements</h3>
+        <p class="meta">Spring Boot · Angular · React · Symfony · Machine learning · SQL</p>
+        <ul>
+          <li data-lang="fr">Conception et développement d'applications de comptabilité, de gestion de stock et de prise de commande pour la restauration.</li>
+          <li data-lang="en">Designed and built applications for accounting, inventory management and restaurant ordering.</li>
+          <li data-lang="fr">Développement d'un système de scoring crédit par apprentissage automatique, avec une interface métier pour exploiter les résultats (SMMEC).</li>
+          <li data-lang="en">Built a machine-learning credit scoring system with a business interface for using the results (SMMEC).</li>
+          <li data-lang="fr">Refonte d'une application institutionnelle, travaux de prédiction d'effectifs et développement d'une plateforme d'emploi (SOA).</li>
+          <li data-lang="en">Rebuilt an institutional application, worked on enrollment forecasting and developed a job platform (SOA).</li>
+          <li data-lang="fr">Automatisation du reporting de caisses sur plusieurs millions de lignes : accès à l'information en quelques secondes, contre plusieurs jours auparavant (SMMEC).</li>
+          <li data-lang="en">Automated cash-desk reporting across millions of database rows, making information available in seconds instead of days (SMMEC).</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="edu">
+      <h2 data-lang="fr">Formation</h2>
+      <h2 data-lang="en">Education</h2>
+      <p data-lang="fr"><strong>Master 2 BIHAR</strong> — ESTIA (France) · ingénierie des données et intelligence artificielle</p>
+      <p data-lang="en"><strong>Master’s (BIHAR)</strong> — ESTIA (France) · data engineering &amp; artificial intelligence</p>
+      <p data-lang="fr"><strong>Licence Informatique</strong> — IT-University Antananarivo · développement full-stack</p>
+      <p data-lang="en"><strong>BSc Computer Science</strong> — IT-University Antananarivo · full-stack development</p>
+    </section>
+
+    <section>
+      <h2 data-lang="fr">Projets personnels</h2>
+      <h2 data-lang="en">Personal projects</h2>
+      <p class="prose" data-lang="fr">
+        Mes projets personnels partent d'une envie de comprendre ou d'un outil dont j'ai besoin. Du rendu 3D aux agents IA, en passant par l'analyse de code et les applications Windows, ils me permettent d'explorer le logiciel au-delà de mes missions web.
+      </p>
+      <p class="prose" data-lang="en">
+        My personal projects start with something I want to understand or a tool I need. From 3D rendering and AI agents to code analysis and Windows applications, they give me room to explore software beyond my client work.
+      </p>
+
+      <article class="project">
+        <h3>Rova</h3>
+        <p class="meta">C++20 · OpenGL 4.5 · CMake</p>
+        <p data-lang="fr">Un moteur 3D isométrique développé en C++ et OpenGL pour explorer le rendu et la construction d'un moteur de jeu. Les captures et vidéos montrent les scènes et prototypes réalisés avec Rova.</p>
+        <p data-lang="en">An isometric 3D engine built in C++ and OpenGL to explore rendering and game-engine development. The screenshots and videos show scenes and prototypes built with Rova.</p>
+        <p class="gallery-label" data-lang="fr">Captures</p>
+        <p class="gallery-label" data-lang="en">Screenshots</p>
+        <div class="gallery">
+          <img src="assets/projects/rova/photos/01.png" alt="Rova — capture 1" loading="lazy" />
+          <img src="assets/projects/rova/photos/02.png" alt="Rova — capture 2" loading="lazy" />
+          <img src="assets/projects/rova/photos/03.png" alt="Rova — capture 3" loading="lazy" />
+          <img src="assets/projects/rova/photos/04.png" alt="Rova — capture 4" loading="lazy" />
+        </div>
+        <p class="gallery-label" data-lang="fr">Démos vidéo</p>
+        <p class="gallery-label" data-lang="en">Video demos</p>
+        <div class="gallery">
+          <video controls preload="metadata" playsinline poster="assets/projects/rova/photos/02.png">
+            <source src="assets/projects/rova/videos/01.mp4" type="video/mp4" />
+          </video>
+          <video controls preload="metadata" playsinline poster="assets/projects/rova/photos/03.png">
+            <source src="assets/projects/rova/videos/02.mp4" type="video/mp4" />
+          </video>
+          <video controls preload="metadata" playsinline poster="assets/projects/rova/photos/01.png">
+            <source src="assets/projects/rova/videos/03.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </article>
+
+      <article class="project">
+        <h3>Aikam</h3>
+        <p class="meta">Next.js · NestJS · Python · LangGraph</p>
+        <p data-lang="fr">Un projet d'agent IA pour les boutiques qui vendent sur les réseaux sociaux. Aikam vise à automatiser les opérations de commerce social à partir du catalogue, avec des règles métier et des validations humaines pour encadrer les actions de l'agent.</p>
+        <p data-lang="en">An AI agent project for shops selling through social media. Aikam aims to automate social-commerce operations using the product catalog, with business rules and human approvals governing the agent's actions.</p>
+        <p class="gallery-label" data-lang="fr">Captures</p>
+        <p class="gallery-label" data-lang="en">Screenshots</p>
+        <div class="gallery">
+          <img src="assets/projects/aikam/01.png" alt="Aikam — catalog admin" loading="lazy" />
+          <img src="assets/projects/aikam/02.png" alt="Aikam — approvals" loading="lazy" />
+          <img src="assets/projects/aikam/03.png" alt="Aikam — capture 3" loading="lazy" />
+          <img src="assets/projects/aikam/04.png" alt="Aikam — capture 4" loading="lazy" />
+          <img src="assets/projects/aikam/05.png" alt="Aikam — capture 5" loading="lazy" />
+          <img src="assets/projects/aikam/06.png" alt="Aikam — capture 6" loading="lazy" />
+        </div>
+      </article>
+
+      <article class="project">
+        <h3>Pomodoro</h3>
+        <p class="meta">C# · .NET · Windows tray</p>
+        <p data-lang="fr">Un minuteur discret dans la barre système de Windows pour alterner concentration et pauses. Cycles configurables, notifications et écran de pause optionnel, dans un exécutable sans installateur. Les réglages sont conservés sur l'ordinateur.</p>
+        <p data-lang="en">A Windows system-tray timer for alternating focus sessions and breaks. Configurable cycles, notifications and an optional break overlay, packaged as a standalone executable with no installer. Settings are stored locally.</p>
+        <p class="gallery-label" data-lang="fr">Captures</p>
+        <p class="gallery-label" data-lang="en">Screenshots</p>
+        <div class="gallery gallery-portrait">
+          <img src="assets/projects/pomodoro/01-focus.png" alt="Pomodoro — focus" loading="lazy" />
+          <img src="assets/projects/pomodoro/02-tray-states.png" alt="Pomodoro — tray states" loading="lazy" />
+          <img src="assets/projects/pomodoro/03-settings.png" alt="Pomodoro — settings" loading="lazy" />
+          <img src="assets/projects/pomodoro/04-break-overlay.png" alt="Pomodoro — break overlay" loading="lazy" />
+        </div>
+      </article>
+
+      <article class="project">
+        <h3>ts-structure-radar</h3>
+        <p class="meta">TypeScript · Tree-sitter · NestJS</p>
+        <p data-lang="fr">Un outil d'analyse de code TypeScript et NestJS avec Tree-sitter. Il extrait la structure et les dépendances du code pour faciliter la lecture de l'architecture, avec des visualisations locales et des exports Mermaid.</p>
+        <p data-lang="en">A TypeScript and NestJS code analysis tool built with Tree-sitter. It extracts code structure and dependencies to make the architecture easier to navigate, with local visualizations and Mermaid exports.</p>
+      </article>
+
+      <article class="project">
+        <h3>MalagasyWire</h3>
+        <p class="meta">.NET · WFP · Tauri · React</p>
+        <p data-lang="fr">Un projet d'outil Windows pour comprendre et contrôler les connexions réseau des applications. Il associe les mécanismes de filtrage de Windows à une interface Tauri/React pour explorer le trafic et les règles de pare-feu.</p>
+        <p data-lang="en">A Windows tool project for understanding and controlling application network connections. It combines Windows filtering capabilities with a Tauri/React interface for exploring traffic and firewall rules.</p>
+      </article>
+    </section>
+
+    <section class="cta" id="echanger">
+      <h2 data-lang="fr">Parlons de votre projet</h2>
+      <h2 data-lang="en">Let's discuss your project</h2>
+      <p class="prose" data-lang="fr">
+        Vous avez une application à développer, une plateforme à reprendre ou une équipe à accompagner ? Présentez-moi votre besoin, l'existant et vos principales contraintes. Nous pourrons définir le périmètre de mon intervention. Je suis disponible pour des missions freelance à distance depuis Madagascar.
+      </p>
+      <p class="prose" data-lang="en">
+        Do you need to build an application, take over an existing platform or support your development team? Tell me about your goals, current setup and constraints so we can define how I can help. I am available for remote freelance work from Madagascar.
+      </p>
+      <div class="links" style="margin-top:0.75rem">
+        <a class="primary" href="mailto:lachapelle.kaky@gmail.com">lachapelle.kaky@gmail.com</a>
+        <a href="https://wa.me/261330730420" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </section>
+
+    <footer>
+      <p data-lang="fr">Français · Anglais · Malagasy · <a href="https://github.com/kaky-lachapelle">GitHub</a></p>
+      <p data-lang="en">French · English · Malagasy · <a href="https://github.com/kaky-lachapelle">GitHub</a></p>
+    </footer>
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" hidden>
+    <img src="" alt="" />
+  </div>
+
+  <script>
+    (function () {
+      var KEY = "portfolio-lang";
+      var html = document.documentElement;
+      function apply(lang) {
+        lang = lang === "en" ? "en" : "fr";
+        html.lang = lang;
+        document.getElementById("btn-fr").classList.toggle("active", lang === "fr");
+        document.getElementById("btn-en").classList.toggle("active", lang === "en");
+        try { localStorage.setItem(KEY, lang); } catch (e) {}
+      }
+      var saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+      apply(saved === "en" ? "en" : "fr");
+      document.getElementById("btn-fr").addEventListener("click", function () { apply("fr"); });
+      document.getElementById("btn-en").addEventListener("click", function () { apply("en"); });
+
+      var lb = document.getElementById("lightbox");
+      var lbImg = lb.querySelector("img");
+      document.querySelectorAll(".gallery img").forEach(function (img) {
+        img.addEventListener("click", function () {
+          lbImg.src = img.src;
+          lbImg.alt = img.alt || "";
+          lb.hidden = false;
+          lb.classList.add("open");
+        });
+      });
+      function closeLb() {
+        lb.classList.remove("open");
+        lb.hidden = true;
+        lbImg.src = "";
+      }
+      lb.addEventListener("click", closeLb);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeLb();
+      });
+    })();
+  </script>
+</body>
+</html>
